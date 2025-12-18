@@ -1,55 +1,45 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Artworks art1 = new Artworks("Allegory of the Planets and Continents", 1452, 3000000);
-        Artworks art2 = new Artworks("Allegory of Government: Wisdom Defeating Discord", 1730, 2500000);
+        ArrayList<CulturalObject> objects = new ArrayList<>();
 
-        Artist artist1 = new Artist("Giovanni Battista Tiepolo", 56, true);
-        Artist artist2 = new Artist("Jacob de Wit", 59, true);
+        objects.add(new Artworks("Allegory of the Planets", 1455, 3000000));
+        objects.add(new Artworks("Allegory of Government", 1730, 2500000));
 
-        Gallery g1 = new Gallery("Modern Art Hall", 1200, "Modern");
-        Gallery g2 = new Gallery("Eastern Gallery", 900, "Eastern");
+        objects.add(new Artist("Giovanni Battista Tiepolo", 56, true));
+        objects.add(new Artist("Jacob de Wit", 59, true));
 
-        System.out.println("=== ARTWORKS ===");
-        art1.printInfo();
-        art2.printInfo();
+        objects.add(new Gallery("Modern Art Hall", 1200, "Modern"));
+        objects.add(new Gallery("Eastern Gallery", 900, "Eastern"));
 
-        System.out.println("\n=== ARTISTS ===");
-        artist1.printInfo();
-        artist2.printInfo();
-
-        System.out.println("\n=== GALLERIES ===");
-        g1.printInfo();
-        g2.printInfo();
-
-        System.out.println("\n=== CULTURAL IMPACT (ARTWORKS) ===");
-        if (art1.compareImpact(art2) > 0) {
-            System.out.println(art1.getTitle() + " has higher cultural impact.");
-        } else if (art1.compareImpact(art2) < 0) {
-            System.out.println(art2.getTitle() + " has higher cultural impact.");
-        } else {
-            System.out.println("Both artworks have equal cultural impact.");
+        System.out.println("=== ALL OBJECTS ===");
+        for (CulturalObject obj : objects) {
+            System.out.println(obj);
         }
 
-        System.out.println("\n=== ARTIST ACTIVITY ===");
-        if (artist1.compareActivity(artist2) > 0) {
-            System.out.println(artist1.getName() + " is more active.");
-        } else if (artist1.compareActivity(artist2) < 0) {
-            System.out.println(artist2.getName() + " is more active.");
-        } else {
-            System.out.println("Both artists have equal activity.");
+        System.out.println("\n=== FILTER: SCORE > 50 ===");
+        for (CulturalObject obj : objects) {
+            if (obj.getScore() > 50) {
+                System.out.println(obj);
+            }
         }
 
-        System.out.println("\n=== GALLERY POPULARITY & STYLE ===");
-        if (g1.compareVisitors(g2) > 0) {
-            System.out.println(g1.getName() + " is more popular.");
-        } else if (g1.compareVisitors(g2) < 0) {
-            System.out.println(g2.getName() + " is more popular.");
-        } else {
-            System.out.println("Both galleries have equal popularity.");
+        System.out.println("\n=== SORTED BY SCORE ===");
+        objects.sort(Comparator.comparingDouble(CulturalObject::getScore));
+        for (CulturalObject obj : objects) {
+            System.out.println(obj + " | Score: " + obj.getScore());
         }
 
-        System.out.println("Do both galleries have the same style? " + g1.isSameStyle(g2));
+        System.out.println("\n=== SEARCH BY NAME (contains 'Art') ===");
+        for (CulturalObject obj : objects) {
+            if (obj.getName().contains("Art")) {
+                System.out.println(obj);
+            }
+        }
     }
 }
+

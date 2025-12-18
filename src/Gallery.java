@@ -1,32 +1,39 @@
-public class Gallery {
+public class Gallery extends CulturalObject {
 
-    private String name;
     private int visitors;
     private String style;
 
     public Gallery(String name, int visitors, String style) {
-        this.name = name;
+        super(name);
         this.visitors = visitors;
         this.style = style;
     }
 
-    public String getName() { return name; }
-    public int getVisitors() { return visitors; }
-    public String getStyle() { return style; }
-
-    public void setName(String name) { this.name = name; }
-    public void setVisitors(int visitors) { this.visitors = visitors; }
-    public void setStyle(String style) { this.style = style; }
-
-    public void printInfo() {
-        System.out.println("Gallery → Name: " + name + ", Visitors: " + visitors + ", Style: " + style);
+    public int getVisitors() {return visitors;
     }
 
-    public int compareVisitors(Gallery other) {
-        return Integer.compare(this.visitors, other.visitors);
+    public String getStyle() {return style;
     }
 
-    public boolean isSameStyle(Gallery other) {
-        return this.style.equalsIgnoreCase(other.style);
+    @Override
+    public double getScore() {
+        return visitors / 100.0;
+    }
+
+    @Override
+    public String toString() {
+        return "Gallery → Name: " + name + ", Visitors: " + visitors + ", Style: " + style;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Gallery)) return false;
+        Gallery other = (Gallery) obj;
+        return name.equals(other.name) && style.equalsIgnoreCase(other.style);
+    }
+
+    @Override
+    public int hashCode() {return name.hashCode() + style.hashCode();
     }
 }

@@ -1,32 +1,42 @@
-public class Artworks {
+public class Artworks extends CulturalObject {
 
-    private String title;
     private int year;
     private double price;
 
     public Artworks(String title, int year, double price) {
-        this.title = title;
+        super(title);
         this.year = year;
         this.price = price;
     }
 
-    public String getTitle() { return title; }
-    public int getYear() { return year; }
-    public double getPrice() { return price; }
-
-    public void setTitle(String title) { this.title = title; }
-    public void setYear(int year) { this.year = year; }
-    public void setPrice(double price) { this.price = price; }
-
-    public void printInfo() {
-        System.out.println("Artworks → Title: " + title + ", Year: " + year + ", Price: $" + price);
+    public int getYear() {
+        return year;
     }
 
-    public double culturalImpactScore() {
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public double getScore() {
         return (2025 - year) + (price / 100000);
     }
 
-    public int compareImpact(Artworks other) {
-        return Double.compare(this.culturalImpactScore(), other.culturalImpactScore());
+    @Override
+    public String toString() {
+        return "Artwork → Title: " + name + ", Year: " + year + ", Price: $" + price;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Artworks)) return false;
+        Artworks other = (Artworks) obj;
+        return year == other.year && name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode() + year;
     }
 }

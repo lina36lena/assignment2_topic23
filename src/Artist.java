@@ -1,32 +1,42 @@
-public class Artist {
+public class Artist extends CulturalObject {
 
-    private String name;
     private int age;
     private boolean famous;
 
     public Artist(String name, int age, boolean famous) {
-        this.name = name;
+        super(name);
         this.age = age;
         this.famous = famous;
     }
 
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public boolean isFamous() { return famous; }
-
-    public void setName(String name) { this.name = name; }
-    public void setAge(int age) { this.age = age; }
-    public void setFamous(boolean famous) { this.famous = famous; }
-
-    public void printInfo() {
-        System.out.println("Artist → Name: " + name + ", Age: " + age + ", Famous: " + famous);
+    public int getAge() {
+        return age;
     }
 
-    public int activityScore() {
+    public boolean isFamous() {
+        return famous;
+    }
+
+    @Override
+    public double getScore() {
         return famous ? age * 2 : age;
     }
 
-    public int compareActivity(Artist other) {
-        return Integer.compare(this.activityScore(), other.activityScore());
+    @Override
+    public String toString() {
+        return "Artist → Name: " + name + ", Age: " + age + ", Famous: " + famous;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Artist)) return false;
+        Artist other = (Artist) obj;
+        return age == other.age && name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode() + age;
     }
 }
