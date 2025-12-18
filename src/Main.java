@@ -2,7 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Artworks art1 = new Artworks("Allegory of the Planets and Continents", 1752, 3000000);
+        Artworks art1 = new Artworks("Allegory of the Planets and Continents", 1452, 3000000);
         Artworks art2 = new Artworks("Allegory of Government: Wisdom Defeating Discord", 1730, 2500000);
 
         Artist artist1 = new Artist("Giovanni Battista Tiepolo", 56, true);
